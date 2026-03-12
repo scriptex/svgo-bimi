@@ -1,6 +1,6 @@
 {
 	"name": "svgo-bimi",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"description": "SVGO plugin and CLI tool to optimize and validate SVGs for BIMI (SVG Tiny P/S) compliance",
 	"keywords": [
 		"SVGO",
