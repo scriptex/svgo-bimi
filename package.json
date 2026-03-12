@@ -1,0 +1,89 @@
+{
+	"name": "svgo-bimi",
+	"version": "1.0.0",
+	"description": "SVGO plugin and CLI tool to optimize and validate SVGs for BIMI (SVG Tiny P/S) compliance",
+	"keywords": [
+		"SVGO",
+		"BIMI",
+		"SVG",
+		"SVG Optimize"
+	],
+	"bugs": {
+		"url": "https://github.com/scriptex/svgo-bimi-plugin/issues",
+		"email": "hi@atanas.info"
+	},
+	"license": "MIT",
+	"author": "Atanas Atanasov <hi@atanas.info> (https://atanas.info)",
+	"funding": "https://github.com/sponsors/scriptex",
+	"main": "dist/index.js",
+	"bin": {
+		"svgo-bimi": "./bin/index.js"
+	},
+	"type": "module",
+	"types": "dist/index.d.ts",
+	"repository": {
+		"type": "git",
+		"url": "github:scriptex/svgo-bimi-plugin"
+	},
+	"scripts": {
+		"build": "tsc",
+		"prepare": "yarn build",
+		"start": "node --loader ts-node/esm src/cli.ts",
+		"test": "yarn prepare && node --test tests/*.test.js",
+		"release-minor": "release-it minor --ci",
+		"release-patch": "release-it patch --ci",
+		"release-major": "release-it major --ci",
+		"changelog-local": "npx auto-changelog"
+	},
+	"dependencies": {
+		"chalk": "5.6.2",
+		"commander": "14.0.3",
+		"svgo": "4.0.1"
+	},
+	"devDependencies": {
+		"@types/node": "25.4.0",
+		"release-it": "19.2.4",
+		"ts-node": "10.9.2",
+		"typescript": "5.9.3"
+	},
+	"engines": {
+		"node": ">= 16.0.0"
+	},
+	"release-it": {
+		"hooks": {
+			"after:release": "yarn changelog-local && git add CHANGELOG.md && git commit -m \"Update CHANGELOG.md with the latest changes\" --no-verify && git push"
+		},
+		"use": "pkg.version",
+		"git": {
+			"changelog": "git log --pretty=format:\"* %s (%h)\" ${from}...${to}",
+			"requireCleanWorkingDir": true,
+			"requireBranch": false,
+			"requireUpstream": false,
+			"requireCommits": false,
+			"addUntrackedFiles": false,
+			"commit": true,
+			"commitMessage": "Release ${version}",
+			"commitArgs": [
+				"--no-verify"
+			],
+			"tag": true,
+			"tagName": "${version}",
+			"tagAnnotation": "Release ${version}",
+			"tagArgs": [],
+			"push": true,
+			"pushArgs": [
+				"--follow-tags"
+			],
+			"pushRepo": ""
+		},
+		"github": {
+			"release": false
+		},
+		"gitlab": {
+			"release": false
+		},
+		"npm": {
+			"publish": false
+		}
+	}
+}
