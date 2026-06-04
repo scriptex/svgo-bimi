@@ -49,7 +49,7 @@ export default {
 };
 ```
 
-**Disclaimer:** Currently, SVGO doesn't support the SVG Tiny 1.2 standard so it's almost impossible to add `version="1.2"` to the optimized file using SVGO alone. More about this [here](https://github.com/svg/svgo/issues/1261). If you insist on using `svgo-bimi` as a plugin for SVGO, you must add the `version="1.2"` and `baseProfile="tiny-ps"` attributes using your own implementation.
+**Disclaimer:** Currently, SVGO doesn't support the SVG Tiny 1.2 standard so it's almost impossible to add `version="1.2"` to the optimized file using SVGO alone. More about this [here](https://github.com/svg/svgo/issues/1261). `svgo-bimi` attempts to add the `version="1.2"` and `baseProfile="tiny-ps"` attributes to the SVG but it is not 100% reliable.
 
 ## Options
 
