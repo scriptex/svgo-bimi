@@ -38,7 +38,7 @@
 	"dependencies": {
 		"chalk": "6.0.0",
 		"commander": "15.0.0",
-		"svgo": "4.0.2"
+		"svgo": "4.1.0"
 	},
 	"devDependencies": {
 		"@types/node": "25.9.5",
