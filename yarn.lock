@@ -286,10 +286,10 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.4.tgz#0b92dcc0cc1c81f6f306a381f28e31b1a56536e9"
   integrity sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==
 
-"@types/node@25.9.5":
-  version "25.9.5"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-25.9.5.tgz#0fefc09e6e82e94cde291bacf43522e989eb01a4"
-  integrity sha512-OScDchr2fwuUmWdf4kZ9h7PcJiYDVInhJizG/biAq3cAvqwYktuy/TYGGdZNMtNTFUP7rnb0NU4TUdm82kt4Rg==
+"@types/node@25.9.8":
+  version "25.9.8"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-25.9.8.tgz#a460865b194c2c416a8f11841613207848b92583"
+  integrity sha512-VfMrScDmMhUJQmd5hArdQnFvK0OIeD36uN2Va1FcpYaLB/BgkgM8Ulc50XtYISPMz7APJ30+N0T5EM0jlcdfRw==
   dependencies:
     undici-types ">=7.24.0 <7.24.7"
 
@@ -1047,10 +1047,10 @@ readdirp@^5.0.0:
   resolved "https://registry.yarnpkg.com/readdirp/-/readdirp-5.0.0.tgz#fbf1f71a727891d685bb1786f9ba74084f6e2f91"
   integrity sha512-9u/XQ1pvrQtYyMpZe7DXKv2p5CNvyVwzUB6uhLAnQwHMSgKMBR62lc7AHljaeteeHXn11XTAaLLUVZYVZyuRBQ==
 
-release-it@21.0.2:
-  version "21.0.2"
-  resolved "https://registry.yarnpkg.com/release-it/-/release-it-21.0.2.tgz#48e1326e89bb54ca717489e35121574e1718a4be"
-  integrity sha512-QwyDnWiQNB4d8Hc2b5FLMHcsKz9S2O1dMNnPB7w+0knsL5r8+qbnznDA1X7Bw5D863+Ud7eRHc71Cfth5Tlrgg==
+release-it@21.0.3:
+  version "21.0.3"
+  resolved "https://registry.yarnpkg.com/release-it/-/release-it-21.0.3.tgz#d18cb840e5bc00ebc3c5ea941c8f38f5642252f4"
+  integrity sha512-Pd5Uqj5hJmVAZzb+QSkkDgfvHJwRBazWryb90x5FYHhPxg35cE+1wX9v1DXk4ENy8C0osHxH/yRk1mvnZi7ZHQ==
   dependencies:
     "@inquirer/prompts" "8.5.2"
     "@octokit/rest" "22.0.1"
