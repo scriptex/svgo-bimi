@@ -42,7 +42,7 @@
 	},
 	"devDependencies": {
 		"@types/node": "25.9.8",
-		"release-it": "21.0.3",
+		"release-it": "21.1.0",
 		"ts-node": "10.9.2",
 		"typescript": "5.9.3"
 	},
