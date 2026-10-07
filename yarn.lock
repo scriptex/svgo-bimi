@@ -286,10 +286,10 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.4.tgz#0b92dcc0cc1c81f6f306a381f28e31b1a56536e9"
   integrity sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==
 
-"@types/node@25.9.8":
-  version "25.9.8"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-25.9.8.tgz#a460865b194c2c416a8f11841613207848b92583"
-  integrity sha512-VfMrScDmMhUJQmd5hArdQnFvK0OIeD36uN2Va1FcpYaLB/BgkgM8Ulc50XtYISPMz7APJ30+N0T5EM0jlcdfRw==
+"@types/node@25.9.9":
+  version "25.9.9"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-25.9.9.tgz#19f1b689ab7558ed910664b6078113b8abbef1d0"
+  integrity sha512-b4e2xxj/yMeT2hNlD6x7zNFiQK2Dlmkb9CQ6v3/1G2RezKN4YS2lcEv8lzGm1mhs4f2lM4yNAMI/zUDBZBBt7w==
   dependencies:
     undici-types ">=7.24.0 <7.24.7"
 
@@ -381,10 +381,10 @@ c12@3.3.4:
     pkg-types "^2.3.0"
     rc9 "^3.0.1"
 
-chalk@6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-6.0.0.tgz#a3bae843bc8454f41ef66ef3fd584dcf34dd805d"
-  integrity sha512-2uNTXIuTTxk7ciZgAU1BQcgnchcG0xXnrs6jzkQfj9SsRa9M2s5zE8WT96hS6KmG4MzWHSrvH43DF1m4XRkrFg==
+chalk@6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-6.0.1.tgz#077d4667ad6e608c9687782caed3d534d7f9abc3"
+  integrity sha512-/Ce6KNm3vIbWdMlNna6RVIZ/ICQxnJxCicet5LBKK9ZffBkqzDw0xh9EiKSljdRtiIQ1S1z4YgcscUUGzNCWrA==
 
 chalk@^5.6.2:
   version "5.6.2"
