@@ -41,7 +41,7 @@
 		"svgo": "4.1.0"
 	},
 	"devDependencies": {
-		"@types/node": "25.9.9",
+		"@types/node": "26.6.6",
 		"release-it": "21.1.2",
 		"ts-node": "10.9.2",
 		"typescript": "5.9.3"
