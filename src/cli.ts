@@ -40,10 +40,30 @@ program
 		};
 
 		const optimized = optimize(rawSvg, config);
+
 		let finalSvg = optimized.data;
 
-		if (!finalSvg.includes('version="1.2"')) {
-			finalSvg = finalSvg.replace('<svg', '<svg version="1.2" baseProfile="tiny-ps"');
+		const svgTag = finalSvg.match(/<svg\b[^>]*>/)?.[0];
+
+		if (svgTag) {
+			const attributes = [
+				['version', '1.2'],
+				['baseProfile', 'tiny-ps']
+			] as const;
+
+			let updatedSvgTag = svgTag;
+
+			for (const [name, value] of attributes) {
+				const attributePattern = new RegExp(`(^|\\s)${name}=(["'])[^"']*\\2`);
+
+				if (attributePattern.test(updatedSvgTag)) {
+					updatedSvgTag = updatedSvgTag.replace(attributePattern, `$1${name}="${value}"`);
+				} else {
+					updatedSvgTag = updatedSvgTag.replace('>', ` ${name}="${value}">`);
+				}
+			}
+
+			finalSvg = finalSvg.replace(svgTag, updatedSvgTag);
 		}
 
 		const vb = optimized.data.match(/viewBox=["'](\d+\.?\d*)\s+(\d+\.?\d*)\s+(\d+\.?\d*)\s+(\d+\.?\d*)["']/);

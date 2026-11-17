@@ -34,6 +34,8 @@ describe('CLI Integration Tests', () => {
 
 		assert.match(content, /version="1.2"/, 'Missing BIMI version');
 		assert.match(content, /baseProfile="tiny-ps"/, 'Missing BIMI profile');
+		assert.strictEqual((content.match(/version="1\.2"/g) || []).length, 1, 'Duplicate BIMI version');
+		assert.strictEqual((content.match(/baseProfile="tiny-ps"/g) || []).length, 1, 'Duplicate BIMI profile');
 	});
 
 	test('CLI: should fail gracefully if file is missing', () => {
@@ -50,5 +52,22 @@ describe('CLI Integration Tests', () => {
 
 		assert.ok(fs.existsSync(nestedDir), 'Nested output directory was not created');
 		assert.ok(fs.existsSync(path.join(nestedDir, 'pass-bimi.svg')));
+	});
+
+	test('CLI: should convert arcs and preserve single BIMI attributes', () => {
+		const inputFile = path.join(OUTPUT_DIR, 'arc.svg');
+		const raw = '<svg viewBox="0 0 100 100"><path d="M10 50 A40 40 0 0 1 90 50"/></svg>';
+
+		fs.writeFileSync(inputFile, raw);
+
+		execSync(`node ${CLI_PATH} -f ${inputFile} -o ${OUTPUT_DIR}`);
+
+		const content = fs.readFileSync(path.join(OUTPUT_DIR, 'arc-bimi.svg'), 'utf8');
+		const pathData = content.match(/<path[^>]*\bd="([^"]+)"/)?.[1] || '';
+
+		assert.match(pathData, /[Cc]/, 'Arc was not converted to a cubic curve');
+		assert.doesNotMatch(pathData, /[aA]/, 'Arc command remains in the path');
+		assert.strictEqual((content.match(/version="1\.2"/g) || []).length, 1, 'Duplicate BIMI version');
+		assert.strictEqual((content.match(/baseProfile="tiny-ps"/g) || []).length, 1, 'Duplicate BIMI profile');
 	});
 });
