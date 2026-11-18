@@ -37,7 +37,7 @@ program
 		const config: Config = {
 			multipass: true,
 			plugins: [
-				svgoBimiPlugin as PluginConfig,
+				svgoBimiPlugin,
 				{
 					name: 'preset-default',
 					params: {
