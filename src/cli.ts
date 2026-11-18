@@ -36,7 +36,19 @@ program
 
 		const config: Config = {
 			multipass: true,
-			plugins: [svgoBimiPlugin as PluginConfig, { name: 'preset-default' } as PluginConfig]
+			plugins: [
+				svgoBimiPlugin as PluginConfig,
+				{
+					name: 'preset-default',
+					params: {
+						overrides: {
+							convertPathData: {
+								makeArcs: false
+							}
+						}
+					}
+				} as PluginConfig
+			]
 		};
 
 		const optimized = optimize(rawSvg, config);

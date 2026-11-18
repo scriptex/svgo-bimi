@@ -49,7 +49,7 @@ export default {
 };
 ```
 
-SVGO's default preset may remove SVG Tiny 1.2 metadata during optimization. The CLI restores exactly one `version="1.2"` and `baseProfile="tiny-ps"` attribute in the output; other SVGO plugins may still alter metadata when using the plugin directly. Arc path commands (`A`/`a`), which SVG Tiny 1.2 does not support, are approximated with cubic Bézier curves.
+SVGO's default preset may remove SVG Tiny 1.2 metadata during optimization. The CLI restores exactly one `version="1.2"` and `baseProfile="tiny-ps"` attribute in the output; other SVGO plugins may still alter metadata when using the plugin directly. Arc path commands (`A`/`a`), which SVG Tiny 1.2 does not support, are approximated with cubic Bézier curves, and the CLI disables SVGO's arc-recreation optimization so those commands are not reintroduced.
 
 ## Options
 

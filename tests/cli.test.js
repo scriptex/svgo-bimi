@@ -70,4 +70,27 @@ describe('CLI Integration Tests', () => {
 		assert.strictEqual((content.match(/version="1\.2"/g) || []).length, 1, 'Duplicate BIMI version');
 		assert.strictEqual((content.match(/baseProfile="tiny-ps"/g) || []).length, 1, 'Duplicate BIMI profile');
 	});
+
+	test('CLI: should not reintroduce arcs in the supplied BIMI logo', () => {
+		const inputFile = path.join(OUTPUT_DIR, 'supplied-logo.svg');
+		// https://github.com/scriptex/svgo-bimi/issues/23
+		const raw =
+			'<svg version="1.2" xmlns="http://www.w3.org/2000/svg" width="800" height="800" baseProfile="tiny-ps" viewBox="0 0 24 24"><title>BIMI Logo</title><circle cx="9.5" cy="14.5" r="7.5" stroke="#eceff4" stroke-width="1.5"/><path stroke="#eceff4" stroke-linecap="round" stroke-width="1.5" d="M10 16h2"/><path fill="#eceff4" d="M14 12.5c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5.448-1.5 1-1.5 1 .672 1 1.5"/><ellipse cx="9" cy="12.5" fill="#eceff4" rx="1" ry="1.5"/><path stroke="#eceff4" stroke-linecap="round" stroke-width="1.5" d="m17 7-2 2"/><path stroke="#eceff4" stroke-width="1.5" d="M17.981 2.353a.558.558 0 0 1 1.038 0l.654 1.66c.057.143.17.257.315.314l1.659.654c.47.186.47.852 0 1.038l-1.66.654a.56.56 0 0 0-.314.315l-.654 1.659a.558.558 0 0 1-1.038 0l-.654-1.66a.56.56 0 0 0-.315-.314l-1.659-.654a.558.558 0 0 1 0-1.038l1.66-.654a.56.56 0 0 0 .314-.315z"/></svg>';
+
+		fs.writeFileSync(inputFile, raw);
+
+		execSync(`node ${CLI_PATH} -f ${inputFile} -o ${OUTPUT_DIR}`);
+
+		const content = fs.readFileSync(path.join(OUTPUT_DIR, 'supplied-logo-bimi.svg'), 'utf8');
+		const pathData = [...content.matchAll(/<path\b[^>]*\bd="([^"]+)"/g)].map(match => match[1]);
+
+		assert.ok(pathData.length > 0, 'No path data found in optimized logo');
+		assert.ok(
+			pathData.every(d => !/[aA]/.test(d)),
+			'Arc command remains in a path'
+		);
+
+		assert.strictEqual((content.match(/version="1\.2"/g) || []).length, 1, 'Duplicate BIMI version');
+		assert.strictEqual((content.match(/baseProfile="tiny-ps"/g) || []).length, 1, 'Duplicate BIMI profile');
+	});
 });
