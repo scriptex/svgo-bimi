@@ -290,7 +290,23 @@ export const svgoBimiPlugin: CustomPlugin = {
 						'baseProfile',
 						'viewBox',
 						'width',
-						'height'
+						'height',
+						'fill',
+						'fill-opacity',
+						'fill-rule',
+						'stroke',
+						'stroke-width',
+						'stroke-opacity',
+						'stroke-linecap',
+						'stroke-linejoin',
+						'stroke-miterlimit',
+						'stroke-dasharray',
+						'stroke-dashoffset',
+						'opacity',
+						'color',
+						'clip-rule',
+						'paint-order',
+						'vector-effect'
 					]);
 
 					for (const attr in node.attributes) {

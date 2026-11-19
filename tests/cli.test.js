@@ -93,4 +93,48 @@ describe('CLI Integration Tests', () => {
 		assert.strictEqual((content.match(/version="1\.2"/g) || []).length, 1, 'Duplicate BIMI version');
 		assert.strictEqual((content.match(/baseProfile="tiny-ps"/g) || []).length, 1, 'Duplicate BIMI profile');
 	});
+
+	test('CLI: should preserve inherited root presentation attributes', () => {
+		const inputFile = path.join(OUTPUT_DIR, 'root-fill.svg');
+		const raw = '<svg fill="none" stroke="#1C274C" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 2h20"/></svg>';
+
+		fs.writeFileSync(inputFile, raw);
+
+		execSync(`node ${CLI_PATH} -f ${inputFile} -o ${OUTPUT_DIR}`);
+
+		const content = fs.readFileSync(path.join(OUTPUT_DIR, 'root-fill-bimi.svg'), 'utf8');
+		const svgTag = content.match(/<svg\b[^>]*>/)?.[0] || '';
+
+		assert.match(svgTag, /\bfill="none"/, 'Root fill was removed');
+		assert.match(svgTag, /\bstroke="#1c274c"/i, 'Root stroke was removed');
+		assert.match(svgTag, /\bstroke-width="1\.5"/, 'Root stroke width was removed');
+	});
+
+	test('CLI: should preserve transparency and stroke widths in reported SVGs', () => {
+		for (const fixture of ['bell-off.svg', 'buildings-2.svg', 'palette-round.svg']) {
+			const inputFile = path.join(FIXTURES_DIR, fixture);
+
+			execSync(`node ${CLI_PATH} -f ${inputFile} -o ${OUTPUT_DIR}`);
+
+			const outputFile = path.join(
+				OUTPUT_DIR,
+				`${path.basename(fixture, '.svg')}-bimi.svg`
+			);
+			const content = fs.readFileSync(outputFile, 'utf8');
+			const svgTag = content.match(/<svg\b[^>]*>/)?.[0] || '';
+
+			assert.match(svgTag, /\bfill="none"/, `${fixture}: root transparency was removed`);
+			assert.match(content, /\bstroke-width="1\.5"/, `${fixture}: stroke width was removed`);
+			assert.strictEqual(
+				(content.match(/version="1\.2"/g) || []).length,
+				1,
+				`${fixture}: duplicate BIMI version`
+			);
+			assert.strictEqual(
+				(content.match(/baseProfile="tiny-ps"/g) || []).length,
+				1,
+				`${fixture}: duplicate BIMI profile`
+			);
+		}
+	});
 });

@@ -41,7 +41,9 @@
 		"svgo": "4.1.0"
 	},
 	"devDependencies": {
+		"@resvg/resvg-js": "2.6.2",
 		"@types/node": "26.6.6",
+		"pixelmatch": "8.0.0",
 		"release-it": "21.1.2",
 		"ts-node": "10.9.2",
 		"typescript": "5.9.3"
