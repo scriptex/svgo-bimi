@@ -37,3 +37,5 @@ tslint.json
 yarn.lock
 
 !dist
+.vscode
+tests
