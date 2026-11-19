@@ -70,6 +70,22 @@ describe('BIMI Integration Tests', () => {
 		assert.strictEqual(profileCount, 1, 'Should not duplicate baseProfile');
 	});
 
+	test('Transformation: Should replace arc path commands with curves', () => {
+		for (const d of [
+			'M10 50 A40 40 0 0 1 90 50',
+			'M10 50 a40 40 0 0 1 80 0',
+			'M10 50 A40 40 0 0190 50',
+			'M0 0 A0 10 0 0 1 20 20'
+		]) {
+			const raw = `<svg><path d="${d}"/></svg>`;
+			const result = optimize(raw, { plugins: [svgoBimiPlugin] });
+			const pathData = result.data.match(/<path[^>]*d="([^"]+)"/)?.[1] || '';
+
+			assert.ok(pathData.includes('C'), `Arc was not converted to a cubic curve: ${d}`);
+			assert.doesNotMatch(pathData, /[aA]/, `Arc command remains in the path: ${d}`);
+		}
+	});
+
 	test('Validation: Should recursively scan nested groups', () => {
 		const raw = '<svg><g><g><script>bad()</script></g></g></svg>';
 		// Using validateBimi to check if it finds nested forbidden tags

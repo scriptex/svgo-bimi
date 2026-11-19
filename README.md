@@ -49,7 +49,7 @@ export default {
 };
 ```
 
-**Disclaimer:** Currently, SVGO doesn't support the SVG Tiny 1.2 standard so it's almost impossible to add `version="1.2"` to the optimized file using SVGO alone. More about this [here](https://github.com/svg/svgo/issues/1261). `svgo-bimi` attempts to add the `version="1.2"` and `baseProfile="tiny-ps"` attributes to the SVG but it is not 100% reliable.
+SVGO's default preset may remove SVG Tiny 1.2 metadata during optimization. The CLI restores exactly one `version="1.2"` and `baseProfile="tiny-ps"` attribute in the output; other SVGO plugins may still alter metadata when using the plugin directly. Arc path commands (`A`/`a`), which SVG Tiny 1.2 does not support, are approximated with cubic Bézier curves, and the CLI disables SVGO's arc-recreation optimization so those commands are not reintroduced. Root-level SVG presentation attributes such as `fill` and `stroke` are retained so child elements keep their inherited appearance.
 
 ## Options
 
@@ -102,6 +102,8 @@ npm start
 ```bash
 npm test
 ```
+
+The test suite includes SVG visual regression checks. It rasterizes fixture inputs and CLI outputs with Resvg at 256 pixels wide, then fails if more than 1% of pixels differ.
 
 ## License
 
